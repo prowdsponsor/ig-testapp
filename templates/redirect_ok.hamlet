@@ -1,0 +1,5 @@
+<h1>_{MsgLoginOK}
+
+<ul>
+  <li>_{MsgLoginCode} #{code}
+  <li>_{MsgLoginToken} #{show authToken}
