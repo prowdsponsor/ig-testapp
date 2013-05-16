@@ -1,0 +1,5 @@
+<h1>_{MsgHello}
+
+<ul>
+  <li> _{MsgLoginURL} #{url}
+  <li> <a href="#{url}">_{MsgLogin}</a>

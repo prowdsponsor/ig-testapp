@@ -7,7 +7,6 @@ Default: &defaults
   igredirect: redirecturi
   igclientID: clientID
   igclientSecret: clientSecret
-  
 
 Development:
   <<: *defaults
