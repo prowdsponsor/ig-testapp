@@ -1,12 +1,12 @@
 Default: &defaults
   host: "*4" # any IPv4 host
   port: 5555
-  approot: "http://dev.whonodes.org:5555"
+  approot: "your app root"
   copyright: (c) 2013 Loyful
   #analytics: UA-YOURCODE
-  igredirect: http://dev.whonodes.org:5555/redirect_uri
-  igclientID: fea81dc4946d490c9e74d47c81736cd4
-  igclientSecret: 43be7f67423d4249905db7cbb831870b
+  igredirect: redirecturi
+  igclientID: clientID
+  igclientSecret: clientSecret
   
 
 Development:
