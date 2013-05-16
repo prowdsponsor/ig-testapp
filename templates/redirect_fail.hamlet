@@ -1,0 +1,6 @@
+<h1>_{MsgLoginFail}
+
+<ul>
+  <li>_{MsgLoginFail_Error} #{err}
+  <li>_{MsgLoginFail_Reason} #{reason}
+  <li>_{MsgLoginFail_Description} #{description}

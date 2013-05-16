@@ -1,0 +1,22 @@
+Default: &defaults
+  host: "*4" # any IPv4 host
+  port: 5555
+  approot: "your app root"
+  copyright: (c) 2013 Loyful
+  #analytics: UA-YOURCODE
+  igredirect: redirecturi
+  igclientID: clientID
+  igclientSecret: clientSecret
+
+Development:
+  <<: *defaults
+
+Testing:
+  <<: *defaults
+
+Staging:
+  <<: *defaults
+
+Production:
+  #approot: "http://www.example.com"
+  <<: *defaults
