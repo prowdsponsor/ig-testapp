@@ -143,7 +143,7 @@ catchW :: WidgetT App IO () -> WidgetT App IO ()
 catchW f=L.catches f [
    L.Handler (\e -> L.throw (e :: L.AsyncException))
   ,L.Handler (\e -> h (e :: H.HttpException))
-  ,L.Handler (\e -> h (e :: ISException))]
+  ,L.Handler (\e -> h (e :: IGException))]
   where 
     h :: (L.Exception e) => e -> WidgetT App IO ()
     h e=do
