@@ -7,6 +7,7 @@ import Instagram
 
 import qualified Data.Map as DM
 import Data.Maybe (fromMaybe)
+import Data.Default (def)
 
 
 getRedirectR :: Handler RepHtml
@@ -20,6 +21,9 @@ getRedirectR=do
       Just code->catchW $ do
           authToken<-runInstragramInYesod $
             getUserAccessTokenURL2 igredirect code
+          emds<-runInstragramInYesod $
+            --getRecent (uID $ oaUser authToken) (oaAccessToken authToken) def
+            getSelfLiked authToken def
           setTitleI MsgLoginOK
           $(widgetFile "redirect_ok")
       Nothing->do
