@@ -3,3 +3,6 @@
 <ul>
   <li>_{MsgLoginCode} #{code}
   <li>_{MsgLoginToken} #{show authToken}
+  <li>#{show emds}
+  
+<a href=@{SubscriptionsR}>_{MsgSubscriptions}
