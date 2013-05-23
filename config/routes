@@ -5,3 +5,8 @@
 
 / HomeR GET
 /redirect_uri RedirectR GET
+/subs SubscriptionsR GET
+/deleteSub/#Text DeleteSubscriptionR GET
+/callSub CallbackR GET POST
+/createSub CreateSubscriptionR POST
+/recentTagged/#Text/#Text RecentTaggedR GET

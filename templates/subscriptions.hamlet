@@ -1,0 +1,13 @@
+<h1>_{MsgSubscriptions}
+
+$if null subs
+    <p>_{MsgSubscription_None}
+$else
+    <ul>
+        $forall sub <- subs
+            <li>#{show sub} (<a href=@{DeleteSubscriptionR $ sID sub}>_{MsgSubscription_Delete}</a>)
+            
+_{MsgSubscription_Tag_Create}            
+<form method=post action=@{CreateSubscriptionR} enctype=#{enctype}>
+    ^{widget}
+    <input type=submit value=_{MsgSubscription_Create}>

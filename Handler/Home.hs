@@ -1,25 +1,18 @@
 {-# LANGUAGE TupleSections, OverloadedStrings #-}
+-- | home page
 module Handler.Home where
 
 import Import
-import Yesod.Default.Config (appExtra)
 
 import Instagram
 
--- This is a handler function for the GET request method on the HomeR
--- resource pattern. All of your resource patterns are defined in
--- config/routes
---
--- The majority of the code you will write in Yesod lives in these handler
--- functions. You can spread them across multiple files if you are so
--- inclined, or create a single monolithic file.
+-- | displays the login action
 getHomeR :: Handler RepHtml
 getHomeR = do
-    y <- getYesod
-    let submission = Nothing :: Maybe (FileInfo, Text)
-        handlerName = "getHomeR" :: Text
-        igredirect=extraIGRedirect $ appExtra $ settings y
-    url<-runInstragramInYesod $
+     -- get the redirect url
+    render <- getUrlRender  
+    let igredirect = render RedirectR
+    url<-runInstagramInYesod $
           getUserAccessTokenURL1 igredirect []
         
     defaultLayout $ do

@@ -64,7 +64,6 @@ widgetFile = (if development then widgetFileReload
 data Extra = Extra
     { extraCopyright :: Text
     , extraAnalytics :: Maybe Text -- ^ Google Analytics
-    , extraIGRedirect :: Text
     , extraIGClientID :: Text
     , extraIGClientSecret :: Text
     } deriving Show
@@ -73,6 +72,5 @@ parseExtra :: DefaultEnv -> Object -> Parser Extra
 parseExtra _ o = Extra
     <$> o .:  "copyright"
     <*> o .:? "analytics"
-    <*> o .: "igredirect"
     <*> o .: "igclientID"
     <*> o .: "igclientSecret"
