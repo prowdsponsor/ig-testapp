@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes #-}
 -- | manage subscriptions
 module Handler.Subscriptions where
 
@@ -49,5 +50,9 @@ postCreateSubscriptionR = do
 data TagN=TagN Text  
 
 -- | the form for the tag subscription
+tagForm ::  forall (m :: * -> *).(MonadHandler m, HandlerSite m ~ App) =>
+  Html -> MForm m (FormResult TagN, WidgetT App IO ())
 tagForm=renderDivs $ TagN
-    <$> areq textField "Tag"  Nothing
+    <$> areq textField (fs MsgSubscription_Tag) Nothing
+    where fs n=FieldSettings (SomeMessage n) (Just $ SomeMessage n) Nothing Nothing []
+    
