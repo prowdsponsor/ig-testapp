@@ -1,37 +1,38 @@
+-- | the page handling the redirection from Instagram
 module Handler.Redirect where
 
 import Import
-import Yesod.Default.Config (appExtra)
 
 import Instagram
 
-import qualified Data.Map as DM
 import Data.Maybe (fromMaybe)
 import Data.Default (def)
+import Control.Monad (liftM)
 
-
+-- | handle the redirect
 getRedirectR :: Handler RepHtml
 getRedirectR=do
-  req<-getRequest
-  y<-getYesod
-  let params=DM.fromList $ reqGetParams req
-      igredirect=extraIGRedirect $ appExtra $ settings y
-  defaultLayout $ do
-    case DM.lookup "code" params of
+  mCode<-lookupGetParam "code"
+  -- get the redirect url
+  render <- getUrlRender  
+  let igredirect = render RedirectR
+  defaultLayout $
+    case mCode of
       Just code->catchW $ do
-          authToken<-runInstragramInYesod $
+          -- perform step 2: get auth token with the given code
+          authToken<-runInstagramInYesod $
             getUserAccessTokenURL2 igredirect code
-          emds<-runInstragramInYesod $
+          -- a simple query to show the user is logged in
+          emds<-runInstagramInYesod $
             --getRecent (uID $ oaUser authToken) (oaAccessToken authToken) def
             getSelfLiked authToken def
           setTitleI MsgLoginOK
           $(widgetFile "redirect_ok")
       Nothing->do
-        let err=fromMaybe "" $ DM.lookup "error" params
-        let reason=fromMaybe "" $ DM.lookup "error_reason" params
-        let description=fromMaybe "" $ DM.lookup "error_description" params
+        -- get all error information
+        err<-liftM (fromMaybe "") $ lookupGetParam "error"
+        reason<-liftM (fromMaybe "") $ lookupGetParam "error_reason"
+        description<-liftM (fromMaybe "") $ lookupGetParam "error_description"
         setTitleI MsgLoginFail
         $(widgetFile "redirect_fail")
   
--- code=CODE
---  error=access_denied&error_reason=user_denied&error_description

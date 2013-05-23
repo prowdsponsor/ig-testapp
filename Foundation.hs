@@ -17,6 +17,7 @@ import System.Log.FastLogger (Logger)
 import qualified Control.Exception.Lifted as L
 import Instagram
 import qualified Network.HTTP.Conduit as H (HttpException)
+import Data.Text (Text)
 
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -128,17 +129,21 @@ getExtra = fmap (appExtra . settings) getYesod
 --
 -- https://github.com/yesodweb/yesod/wiki/Sending-email
 
-runInstragramInYesod :: forall (m :: * -> *) b.
+-- | run instagram actions inside Yesod
+runInstagramInYesod :: forall (m :: * -> *) b.
                                    (MonadHandler m, HandlerSite m ~ App) =>
                                    InstagramT m b -> m b
-runInstragramInYesod f=do
+runInstagramInYesod f=do
   y <- getYesod
+  -- get the relevant information from settings
   let extra=appExtra $ settings y
       igclient=extraIGClientID extra
       igsecret=extraIGClientSecret extra
       mgr= httpManager y
   runInstagramT (Credentials igclient igsecret) mgr f
   
+-- | run a yesod page that may throw an exception
+-- redirect error to a page
 catchW :: WidgetT App IO () -> WidgetT App IO ()
 catchW f=L.catches f [
    L.Handler (\e -> L.throw (e :: L.AsyncException))

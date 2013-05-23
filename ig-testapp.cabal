@@ -79,7 +79,11 @@ library
                  fast-logger >= 0.3,
                  ig,
                  containers,
-                 lifted-base
+                 lifted-base,
+                 wai
+    other-modules:   
+                     Handler.Subscriptions,
+                     Handler.SubscriptionCallback
 
 executable         ig-testapp
     if flag(library-only)
