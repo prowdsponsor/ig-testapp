@@ -83,7 +83,8 @@ library
                  wai
     other-modules:   
                      Handler.Subscriptions,
-                     Handler.SubscriptionCallback
+                     Handler.SubscriptionCallback,
+                     Handler.RecentTagged
 
 executable         ig-testapp
     if flag(library-only)
