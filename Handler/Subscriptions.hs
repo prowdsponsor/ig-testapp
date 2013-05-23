@@ -34,7 +34,7 @@ postCreateSubscriptionR ::  Handler RepHtml
 postCreateSubscriptionR = do
   ((result, _), _) <- runFormPost tagForm
   case result of
-        FormSuccess (Tag t) -> 
+        FormSuccess (TagN t) -> 
           defaultLayout $
             catchW $ do
               -- get callback url
@@ -46,8 +46,8 @@ postCreateSubscriptionR = do
         _ -> defaultLayout $ catchW showSubscriptionList
   
 -- | simple data for creation form
-data Tag=Tag Text  
+data TagN=TagN Text  
 
 -- | the form for the tag subscription
-tagForm=renderDivs $ Tag
+tagForm=renderDivs $ TagN
     <$> areq textField "Tag"  Nothing
