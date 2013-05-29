@@ -4,7 +4,6 @@ Default: &defaults
   approot: "your app root"
   copyright: (c) 2013 Loyful
   #analytics: UA-YOURCODE
-  igredirect: redirecturi
   igclientID: clientID
   igclientSecret: clientSecret
 

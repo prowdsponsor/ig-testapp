@@ -1,0 +1,11 @@
+<h1>_{MsgRecentTagged tag}
+
+<ul>
+  $forall med <- medias
+    <li>#{show med}
+
+<div>
+ $if not $ T.null previous   
+   <a href=@{RecentTaggedR auth tag}?next_min_id=#{previous}>_{MsgRecentTagged_Previous}</a>    
+ $if not $ T.null next   
+   <a href=@{RecentTaggedR auth tag}?next_max_id=#{next}>_{MsgRecentTagged_Next}</a>

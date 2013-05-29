@@ -3,3 +3,9 @@
 <ul>
   <li>_{MsgLoginCode} #{code}
   <li>_{MsgLoginToken} #{show authToken}
+  <li>#{show emds}
+ 
+<p> 
+ <a href=@{SubscriptionsR}>_{MsgSubscriptions}</a>
+<p>
+ <a href=@{RecentTaggedR auth tag}>_{MsgRecentTagged tag}</a>
