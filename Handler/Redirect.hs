@@ -25,9 +25,9 @@ getRedirectR=do
           -- a simple query to show the user is logged in
           emds<-runInstagramInYesod $
             --getRecent (uID $ oaUser authToken) (oaAccessToken authToken) def
-            getSelfLiked authToken def
-            -- getTag "ouch" (oaAccessToken authToken)
-            -- searchTags "love" (oaAccessToken authToken)
+            -- getSelfLiked authToken def
+            -- getTag "ouch" Nothing -- (oaAccessToken authToken)
+            searchTags "love" Nothing -- (oaAccessToken authToken)
             --getRecentTagged "ouch" (oaAccessToken authToken) def
           -- data for the link to RecentTagged
           let (AccessToken auth)=oaAccessToken authToken

@@ -17,8 +17,10 @@ getRecentTaggedR auth tag=do
   mMin<-lookupGetParam "next_min_id"
   defaultLayout $
     catchW $ do
+        -- (AccessToken auth)
+        -- (Just (AccessToken auth))
          emds<-runInstagramInYesod $
-            getRecentTagged tag (AccessToken auth) (def{rtpMaxID=mNext,rtpMinID=mMin})
+            getRecentTagged tag Nothing (def{rtpMaxID=mNext,rtpMinID=mMin})
          let medias=eData emds
          let previous=fromMaybe "" $ getPrevious emds
          let next=fromMaybe "" $ getNext emds 
