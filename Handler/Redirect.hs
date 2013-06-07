@@ -23,12 +23,19 @@ getRedirectR=do
           authToken<-runInstagramInYesod $
             getUserAccessTokenURL2 igredirect code
           -- a simple query to show the user is logged in
-          emds<-runInstagramInYesod $
-            --getRecent (uID $ oaUser authToken) (oaAccessToken authToken) def
-            -- getSelfLiked authToken def
-            -- getTag "ouch" Nothing -- (oaAccessToken authToken)
-            searchTags "love" Nothing -- (oaAccessToken authToken)
-            --getRecentTagged "ouch" (oaAccessToken authToken) def
+          emds<-runInstagramInYesod $ 
+            getRecent (uID $ oaUser authToken) authToken def
+            -- getFollows (uID $ oaUser authToken) Nothing
+            -- getFollowedBy "someuserid" (Just authToken)
+            -- getRequestedBy authToken
+            -- getRelationship "someuserid" authToken
+            -- setRelationShip "someuserid" authToken Follow
+            -- getSelfFeed authToken def
+            -- searchUsers Nothing (UserSearchParams "jack" (Just 3))
+            -- getTag "ouch" Nothing -- authToken
+            -- getUser (uID $ oaUser authToken) Nothing
+            -- searchTags "love" Nothing -- authToken
+            -- getRecentTagged "ouch" (Just authToken) def
           -- data for the link to RecentTagged
           let (AccessToken auth)=oaAccessToken authToken
           let tag="ouch"

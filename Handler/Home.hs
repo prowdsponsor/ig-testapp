@@ -13,6 +13,7 @@ getHomeR = do
     render <- getUrlRender  
     let igredirect = render RedirectR
     url<-runInstagramInYesod $
+          -- Relationships
           getUserAccessTokenURL1 igredirect []
         
     defaultLayout $ do
