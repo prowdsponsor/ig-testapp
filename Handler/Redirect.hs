@@ -24,7 +24,11 @@ getRedirectR=do
             getUserAccessTokenURL2 igredirect code
           -- a simple query to show the user is logged in
           emds<-runInstagramInYesod $ 
-            getRecent (uID $ oaUser authToken) authToken def
+            -- getRecent (uID $ oaUser authToken) authToken def
+            -- getPopularMedia Nothing
+            -- getMedia "somemediaid" Nothing
+             -- Just 13.743136919, lLongitude = Just 100.562324524
+            searchMedia Nothing (def{mspLatitude = Just 13.743136919, mspLongitude = Just 100.562324524, mspDistance=Just 1000})
             -- getFollows (uID $ oaUser authToken) Nothing
             -- getFollowedBy "someuserid" (Just authToken)
             -- getRequestedBy authToken
