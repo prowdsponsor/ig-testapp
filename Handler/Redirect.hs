@@ -42,8 +42,8 @@ getRedirectR=do
             -- getLocation "4318380" Nothing
             -- getLocationRecentMedia  "4318380" Nothing def
             -- 3270684
-            getGeographyRecentMedia "geography id given by object_id from subscription" def
-            --getSelfFeed authToken def
+            -- getGeographyRecentMedia "geography id given by object_id from subscription" def
+            getSelfFeed authToken def
             -- searchUsers Nothing (UserSearchParams "jack" (Just 3))
             -- getTag "ouch" Nothing -- authToken
             -- getUser (uID $ oaUser authToken) Nothing

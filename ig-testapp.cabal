@@ -84,7 +84,8 @@ library
                  ig,
                  containers,
                  lifted-base,
-                 wai
+                 wai,
+                 attoparsec
     other-modules:   
                      Handler.Subscriptions,
                      Handler.SubscriptionCallback,
