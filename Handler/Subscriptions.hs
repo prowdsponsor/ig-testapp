@@ -26,6 +26,7 @@ showSubscriptionList :: WidgetT App IO ()
 showSubscriptionList=do
   esubs<-runInstagramInYesod listSubscriptions
   (widget, enctype) <- generateFormPost tagForm
+  (widgetG, enctypeG) <- generateFormPost geoForm
   let subs=eData esubs
   setTitleI MsgSubscriptions
   $(widgetFile "subscriptions")
@@ -45,6 +46,22 @@ postCreateSubscriptionR = do
               _<-runInstagramInYesod $ createSubscription params
               showSubscriptionList
         _ -> defaultLayout $ catchW showSubscriptionList
+
+-- | create a tag subscription  
+postCreateGeoSubscriptionR ::  Handler RepHtml
+postCreateGeoSubscriptionR = do
+  ((result, _), _) <- runFormPost geoForm
+  case result of
+        FormSuccess (GeoF lat lng rad) -> 
+          defaultLayout $
+            catchW $ do
+              -- get callback url
+              render <- getUrlRender  
+              let igcallback = render CallbackR
+              let params=SubscriptionParams (GeographyRequest lat lng rad) igcallback media Nothing
+              _<-runInstagramInYesod $ createSubscription params
+              showSubscriptionList
+        _ -> defaultLayout $ catchW showSubscriptionList
   
 -- | simple data for creation form
 data TagN=TagN Text  
@@ -56,3 +73,14 @@ tagForm=renderDivs $ TagN
     <$> areq textField (fs MsgSubscription_Tag) Nothing
     where fs n=FieldSettings (SomeMessage n) (Just $ SomeMessage n) Nothing Nothing []
     
+-- | geo data
+data GeoF=GeoF Double Double Integer
+
+-- | the form for geo subscription
+geoForm  ::  forall (m :: * -> *).(MonadHandler m, HandlerSite m ~ App) =>
+  Html -> MForm m (FormResult GeoF, WidgetT App IO ())
+geoForm=renderDivs $ GeoF
+    <$> areq doubleField (fs MsgSubscription_GeoLat) Nothing
+    <*> areq doubleField (fs MsgSubscription_GeoLng) Nothing
+    <*> areq intField (fs MsgSubscription_GeoRad) Nothing
+    where fs n=FieldSettings (SomeMessage n) (Just $ SomeMessage n) Nothing Nothing []

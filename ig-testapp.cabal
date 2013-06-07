@@ -20,6 +20,10 @@ Flag library-only
     Description:   Build for use with "yesod devel"
     Default:       False
 
+flag debug
+  default: False
+  description: Print debugging info.
+
 library
     exposed-modules: 
                      Application
@@ -80,7 +84,8 @@ library
                  ig,
                  containers,
                  lifted-base,
-                 wai
+                 wai,
+                 attoparsec
     other-modules:   
                      Handler.Subscriptions,
                      Handler.SubscriptionCallback,

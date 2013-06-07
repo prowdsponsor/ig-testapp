@@ -8,8 +8,9 @@ import Data.Aeson
 import Network.Wai (requestHeaders)
 
 import Data.Conduit
-import Data.Conduit.Binary (sinkHandle)
-import System.IO (stdout)
+import Data.Conduit.List (consume)
+import qualified Data.ByteString.Lazy as BSL
+import qualified Prelude as Prelude (head)
 
 -- | the get is done by Instagram when the subscription is created
 -- we only need to echo the challenge
@@ -27,16 +28,16 @@ getCallbackR = do
  
 -- | the post is done by Instagram when a real time notification occurs
 -- this is where you need to do something with the update (in a new thread, since you only have 2 seconds to return)
--- TODO X-Hub-Signature verification
 postCallbackR :: Handler RepJson
 postCallbackR = do
   wr<-waiRequest
   let rh=requestHeaders wr
-      sign=filter (\(n,_)-> ("X-Hub-Signature" == n) ) rh
-  --  for now, just dump
-  liftIO $ print "Signature"
-  liftIO $ print sign
-  rawRequestBody $$  sinkHandle stdout
+      sign=Prelude.head $ filter (\(n,_)-> ("X-Hub-Signature" == n) ) rh
+  bss<-rawRequestBody $$ consume
+  let bs=BSL.fromChunks bss
+  verified<-runInstagramInYesod $ 
+    verifySignature (snd sign) bs
+  liftIO $ print ("Verified:" ++ show verified)
   r::(Result [IG.Update])<-parseJsonBody
   liftIO $ print "Updates"
   liftIO $ print r
