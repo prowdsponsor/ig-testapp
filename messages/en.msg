@@ -18,6 +18,12 @@ Subscription_Tag_Create: Create a Tag Subscription
 Subscription_Tag: Tag:
 Subscription_Create: Create
 
+Subscription_Geo_Create: Create a Geographic Subscription
+Subscription_GeoLat:Latitude
+Subscription_GeoLng:Longitude
+Subscription_GeoRad:Radius
+
+
 RecentTagged tag@Text: Recently Tagged with #{tag}
 RecentTagged_Next: Next Results
 RecentTagged_Previous: Previous Results

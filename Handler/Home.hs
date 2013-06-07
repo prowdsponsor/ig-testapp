@@ -14,7 +14,7 @@ getHomeR = do
     let igredirect = render RedirectR
     url<-runInstagramInYesod $
           -- Relationships
-          getUserAccessTokenURL1 igredirect []
+          getUserAccessTokenURL1 igredirect [Likes]
         
     defaultLayout $ do
         aDomId <- newIdent

@@ -23,18 +23,27 @@ getRedirectR=do
           authToken<-runInstagramInYesod $
             getUserAccessTokenURL2 igredirect code
           -- a simple query to show the user is logged in
-          emds<-runInstagramInYesod $ 
+          emds<-runInstagramInYesod $
             -- getRecent (uID $ oaUser authToken) authToken def
             -- getPopularMedia Nothing
+            -- getComments "somemediaid" Nothing
+            -- getSelfLiked authToken 
+            -- _<-like "somemediaid" authToken
+            -- getLikes "somemediaid" Nothing
             -- getMedia "somemediaid" Nothing
-             -- Just 13.743136919, lLongitude = Just 100.562324524
-            searchMedia Nothing (def{mspLatitude = Just 13.743136919, mspLongitude = Just 100.562324524, mspDistance=Just 1000})
+            -- Just 13.743136919, lLongitude = Just 100.562324524
+            -- searchLocations (Just authToken) (def{lspLatitude = Just 13.743136919, lspLongitude = Just 100.562324524, lspDistance=Just 10})
+            -- searchMedia Nothing (def{mspLatitude = Just 13.743136919, mspLongitude = Just 100.562324524, mspDistance=Just 1000})
             -- getFollows (uID $ oaUser authToken) Nothing
             -- getFollowedBy "someuserid" (Just authToken)
             -- getRequestedBy authToken
             -- getRelationship "someuserid" authToken
             -- setRelationShip "someuserid" authToken Follow
-            -- getSelfFeed authToken def
+            -- getLocation "4318380" Nothing
+            -- getLocationRecentMedia  "4318380" Nothing def
+            -- 3270684
+            getGeographyRecentMedia "geography id given by object_id from subscription" def
+            --getSelfFeed authToken def
             -- searchUsers Nothing (UserSearchParams "jack" (Just 3))
             -- getTag "ouch" Nothing -- authToken
             -- getUser (uID $ oaUser authToken) Nothing

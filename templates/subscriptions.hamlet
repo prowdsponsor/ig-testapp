@@ -11,3 +11,8 @@ _{MsgSubscription_Tag_Create}
 <form method=post action=@{CreateSubscriptionR} enctype=#{enctype}>
     ^{widget}
     <input type=submit value=_{MsgSubscription_Create}>
+    
+_{MsgSubscription_Geo_Create}            
+<form method=post action=@{CreateGeoSubscriptionR} enctype=#{enctypeG}>
+    ^{widgetG}
+    <input type=submit value=_{MsgSubscription_Create}>    
