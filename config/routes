@@ -9,4 +9,5 @@
 /deleteSub/#Text DeleteSubscriptionR GET
 /callSub CallbackR GET POST
 /createSub CreateSubscriptionR POST
+/createGeoSub CreateGeoSubscriptionR POST
 /recentTagged/#Text/#Text RecentTaggedR GET
