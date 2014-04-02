@@ -2,13 +2,13 @@ name:              ig-testapp
 version:           0.1
 cabal-version:     >= 1.8
 build-type:        Simple
-copyright:         (c) 2013 Loyful
+copyright:         (c) 2013 Prowdsponsor
 license:           BSD3
 license-file:      LICENSE
 author:            JP Moresmau <jpmoresmau@gmail.com>
-maintainer:        Loyful <opensource@loyful.com>
+maintainer:        Prowdsponsor <opensource@prowdsponsor.com>
 synopsis:          Test web application for Instagram's API Haskell Bindings
-homepage:          https://github.com/loyful/ig-testapp
+homepage:          https://github.com/prowdsponsor/ig-testapp
 description:       Test web application for Instagram's API Haskell Bindings
 category:          Web
 
@@ -25,7 +25,7 @@ flag debug
   description: Print debugging info.
 
 library
-    exposed-modules: 
+    exposed-modules:
                      Application
                      Foundation
                      Import
@@ -55,7 +55,7 @@ library
                 NoMonomorphismRestriction
                 DeriveDataTypeable
 
-    build-depends: 
+    build-depends:
                  base >= 4          && < 5,
                  yesod >= 1.2        && < 1.3,
                  yesod-core >= 1.2        && < 1.3,
@@ -86,7 +86,7 @@ library
                  lifted-base,
                  wai,
                  attoparsec
-    other-modules:   
+    other-modules:
                      Handler.Subscriptions,
                      Handler.SubscriptionCallback,
                      Handler.RecentTagged
@@ -97,11 +97,10 @@ executable         ig-testapp
 
     main-is:           main.hs
     hs-source-dirs:    app
-    build-depends:     
+    build-depends:
                      base
                      , ig-testapp
                      , yesod,
                      containers
 
     ghc-options:       -threaded -O2
-
